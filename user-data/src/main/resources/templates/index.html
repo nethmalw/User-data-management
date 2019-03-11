@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns = "http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title>User data</title>
+	<link th:if="${mode == 'development'}" rel="stylesheet" href="../static/bootstrap.css" th:href="@{/bootstrap.css}"/>
+	<link th:if="${mode == 'production'}" rel="stylesheet" href="../static/bootstrap.min.css" th:href="@{/bootstrap.min.css}"/>
+	<script type="text/javascript" src="/static/angular.min.js" th:src="@{/angular.min.js}"></script>
+	<script type="text/javascript" src="/static/app/app.module.js" th:src="@{/app/app.module.js}"></script>
+	<script type="text/javascript" src="/static/app/user.controller.js" th:src="@{/app/user.controller.js}"></script>
+</head>
+
+<body ng-app="app" ng-controller="UserController as vm">
+
+	<header>
+		<nav class= "navbar navbar-default">
+			<div class= "container-fluid">
+				<div class= "navbar-header">
+					<a class="navbar-brand" href="#">User data</a>
+				</div>
+				<p class="navbar-text navbar-right" th:text="'Signed in as ' + ${username}" style="margin-right: 10px;">Signed In</p>
+			</div>
+		</nav>
+	</header>
+	
+	<div class="row">
+		<div class="col-lg-offset-2 col-lg-8">
+			
+			<table class="table">
+				<thead>
+				<tr>
+				
+					<th>Name</th>
+					<th>Email</th>
+					<th>Date Of birth</th>
+					<th style="width: 90px"></th>
+				
+				</tr>	
+				</thead>
+				
+				<tbody>
+				<tr ng-repeat="user in vm.topics">
+					<td>{{topics.userName}}</td>
+					<td>{{topics.email}}</td>
+					<td>{{topics.birthDate}}</td>
+					<td>
+						<button class="btn btn-danger" ng-click="vm.deleteUser(topics.id)">Delete</button>
+					</td>
+				</tr>
+				</tbody>
+				
+			</table>
+			
+		</div>
+	</div>
+	
+	<footer class="footer" style="position: absolute; bottom:0; background-colour: #f5f5f5;">
+		<div class="container">
+			<p th:text="${datetime}" class="text-muted">Page rendered</p>
+		</div>
+	</footer>
+	
+</body>
+</html>
