@@ -35,7 +35,8 @@ export class NotesComponent implements OnInit {
       userId:"",
       email:"Default",
       name:"Default",
-      date:"Default"
+      date:"Default",
+      skills:"Default"
     };
 
     this.apiService.sendFeedback(newRecord).subscribe(

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { ApiService } from '../shared/api.service';
-import { FormGroup } from '@angular/forms';
+import { SkillRecords } from '../skills/model/records';
+import { modelGroupProvider } from '@angular/forms/src/directives/ng_model_group';
 
 @Component({
   selector: 'app-feedback',
@@ -10,34 +10,36 @@ import { FormGroup } from '@angular/forms';
 })
 export class FeedbackComponent implements OnInit {
 
-  skills = [];
+  skills:SkillRecords[] = [];
   dropdownList = [];
   selectedItems = [];
   dropdownSettings = {};
+  
+  temp = new String();
 
   model:FeedbackViewModel = {
 
     name:'',
     email:'',
-    date:''
+    date:'',
+    skills:''
 
   };
+  
   constructor(private apiService:ApiService) { }
 
   ngOnInit() {
-    this.skills = [
-      {item_id:1,item_text:'Riding'},
-      {item_id:2,item_text:'Boating'}
-    ];
 
-    this.selectedItems = [
-      
-    ];
+
+    this.getAllSkills();
+
+    
 
     this.dropdownSettings = {
       singleSelection: false,
-      idField: 'item_id',
-      textField: 'item_text',
+      idField: 'number',
+      enableCheckAll:true,
+      textField: 'skill',
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
       itemsShowLimit: 4,
@@ -45,19 +47,34 @@ export class FeedbackComponent implements OnInit {
     };
   }
 
+  
   onItemSelect(item: any) {
     console.log(item);
     console.log(this.selectedItems);
+    //this.model.skills = this.selectedItems.skill;
+    for (let i in this.selectedItems) {
+      var temp = this.selectedItems[i].skill.concat(","+temp);
+      //this.model.skills = this.selectedItems[i].skill;
+      console.log(temp);
+    }
+
+    this.model.skills = temp;
+   
   }
   onSelectAll(items: any) {
     console.log(items);
     console.log(this.selectedItems);
+    for (let i in this.selectedItems) {
+      this.model.skills = this.selectedItems[i].skill;
+      console.log(this.model.skills);
+    }
   }
 
   sendFeedback():void{
+    alert(this.model.skills);
     this.apiService.sendFeedback(this.model).subscribe(
       res => {
-        location.reload();
+        //location.reload();
       },
       err=>{
         
@@ -65,10 +82,24 @@ export class FeedbackComponent implements OnInit {
       
     );
   }
+
+  public getAllSkills(){
+    this.apiService.getAllSkills().subscribe(
+      res => {
+        this.skills = res;
+      },
+      err => {
+        
+      }
+    );
+  }
 }
+
+
 
 export interface FeedbackViewModel{
     name:String;
     email:String;
     date:String;
+    skills:String;
 }

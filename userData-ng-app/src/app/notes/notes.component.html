@@ -54,30 +54,51 @@
           <div class="card-body" style="padding:8px; margin-top:8px;" >
             <div>
               <!--Title-->
+              <div>
+                  <label for="name">Employee Id:</label>
               <input  type="text"
                       [(ngModel)]="record.userId"
                       (change)="updateRecord(record)"
                       class="input-label-lg"
                       maxlength = "18" style="width:80%"
               />
+              </div>
+              <div>
+                  <label for="name">Employee Name:</label>
               <input  type="text"
                       [(ngModel)]="record.name"
                       (change)="updateRecord(record)"
                       class="input-label-lg"
                       maxlength = "18" style="width:80%"
               />
+              </div>
+              <div>
+                  <label for="name">Email:</label>
               <input  type="text"
                       [(ngModel)]="record.email"
                       (change)="updateRecord(record)"
                       class="input-label-lg"
                       maxlength = "18" style="width:80%"
               />
+              </div>
+              <div>
+                  <label for="name">Birth Date:</label>
               <input  type="text"
                       [(ngModel)]="record.date"
                       (change)="updateRecord(record)"
                       class="input-label-lg"
                       maxlength = "18" style="width:80%"
               />
+              </div>
+              <div>
+                  <label for="name">Skills:</label>
+              <input  type="text"
+                      [(ngModel)]="record.skills"
+                      (change)="updateRecord(record)"
+                      class="input-label-lg"
+                      maxlength = "18" style="width:80%"
+              />
+              </div>
               
               <a (click)="deleteRecord(record)" class="pull-right text-danger">
                 <i class="fa fa-trash-o"></i>

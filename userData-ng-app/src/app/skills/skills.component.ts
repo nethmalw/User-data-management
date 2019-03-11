@@ -15,6 +15,14 @@ export class SkillsComponent implements OnInit {
 
   constructor(private apiService: ApiService) { }
 
+  model:SkillsViewModel = {
+
+    number:'',
+    skill:''
+
+  };
+  
+
   ngOnInit() {
     this.getAllSkills();
   }
@@ -32,9 +40,8 @@ export class SkillsComponent implements OnInit {
 
   addSkill(){
     let newSkillRecord:SkillRecords = {
-      number:"",
-      skill:"Default"
-      
+      skill:"Default",
+      number:""
     };
 
     this.apiService.sendSkills(newSkillRecord).subscribe(
@@ -78,3 +85,10 @@ export class SkillsComponent implements OnInit {
 
 
 }
+
+export interface SkillsViewModel{
+  number:String;
+  skill:String;
+
+}
+

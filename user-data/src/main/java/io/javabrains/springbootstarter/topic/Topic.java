@@ -24,8 +24,8 @@ public class Topic {
 	private String userName;
 	@Column(name = "birthDate")
 	private String birthDate;
-//	@Column(name = "skills")
-//	private String skills;
+	@Column(name = "skills")
+	private String skills;
 	
 	//@OneToMany(targetEntity=Skills.class, mappedBy = "skillId", cascade = CascadeType.ALL)
 	//private List<Skills> multipleSkills;
@@ -34,12 +34,12 @@ public class Topic {
 		
 	}
 	
-	public Topic(String email, String name,String date) {
+	public Topic(String email, String name,String date,String skills) {
 		super();
 		this.email = email;
 		this.userName = name;
 		this.birthDate = date;
-		//this.skills = skills;
+		this.skills = skills;
 	}
 	
 	public String getEmail() {
@@ -54,12 +54,12 @@ public class Topic {
 	public void setName(String name) {
 		this.userName = name;
 	}
-	/*public String getSkills() {
+	public String getSkills() {
 		return skills;
 	}
 	public void setSkills(String skills) {
 		this.skills = skills;
-	}*/
+	}
 	public String getDate() {
 		return birthDate;
 	}
