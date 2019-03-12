@@ -1,5 +1,7 @@
 package io.javabrains.springbootstarter.topic;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -27,9 +29,18 @@ public class Topic {
 	@Column(name = "skills")
 	private String skills;
 	
-	//@OneToMany(targetEntity=Skills.class, mappedBy = "skillId", cascade = CascadeType.ALL)
-	//private List<Skills> multipleSkills;
 	
+	@OneToMany
+	private Collection<Skills> multipleSkills = new ArrayList<Skills>();
+	
+	public Collection<Skills> getMultipleSkills() {
+		return multipleSkills;
+	}
+
+	public void setMultipleSkills(Collection<Skills> multipleSkills) {
+		this.multipleSkills = multipleSkills;
+	}
+
 	public Topic() {
 		
 	}

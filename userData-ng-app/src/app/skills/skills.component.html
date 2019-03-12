@@ -8,7 +8,7 @@
                 (click)="addSkill()"
                 [disabled] = "selectedRecord == null"
                 class="btn btn-warning pull-right"
-                style="margin-left:12px;"><i class="fa fa-plus"></i> New Record
+                style="margin-left:12px;"><i class="fa fa-plus"></i> New Skill
         </button>
       </div>
   
@@ -20,7 +20,7 @@
       <div class="col-md-3">
         <br>
         <div class="list-group list-group-flush">
-          <a (click) ="selectedSkill=null" class="list-group-item list-group-item-action">
+          <a (click) ="getAllSkills()" class="list-group-item list-group-item-action">
             <i class="fa fa-book"></i>&nbsp;All
           </a>
           <!-- Notebook List -->
@@ -40,7 +40,7 @@
           <div class="col-md-12">
             <!-- Message if there are no notes -->
             <h3 *ngIf="selectedSkill != null">{{selectedRecord.skill}}</h3>
-            <h3 *ngIf="selectedSkill == null">All Records</h3>
+            <h3 *ngIf="selectedSkill == null">All Skills</h3>
             <p *ngIf="this.records.length == 0">There are no records to be displayed</p>
           </div>
         </div>

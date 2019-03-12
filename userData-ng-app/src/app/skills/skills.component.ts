@@ -16,9 +16,9 @@ export class SkillsComponent implements OnInit {
   constructor(private apiService: ApiService) { }
 
   model:SkillsViewModel = {
-
-    number:'',
-    skill:''
+    
+    skill:'',
+    number:''
 
   };
   
@@ -41,22 +41,16 @@ export class SkillsComponent implements OnInit {
   addSkill(){
     let newSkillRecord:SkillRecords = {
       skill:"Default",
-      number:""
+      number:"0"
     };
-
-    this.apiService.sendSkills(newSkillRecord).subscribe(
-      res=>{
-        newSkillRecord.number = res.number;
-        this.records.push(newSkillRecord);
-      },
-      err=>{}
-    );
+    
+    this.updateSkill(newSkillRecord);
   }
 
   updateSkill(updatedRecords: SkillRecords){
       this.apiService.postSkills(updatedRecords.number,updatedRecords).subscribe(
         res => {
-          
+          location.reload();
         }
       );
   }
@@ -87,8 +81,9 @@ export class SkillsComponent implements OnInit {
 }
 
 export interface SkillsViewModel{
-  number:String;
+  
   skill:String;
+  number:String;
 
 }
 

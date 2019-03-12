@@ -43,7 +43,7 @@ export class ApiService {
   getAllSkills() : Observable<SkillRecords[]>{
     return this.http.get<SkillRecords[]>(this.ALL_SKILLS_URL);
   }
-  sendSkills(feedback: SkillsFeedbackViewModel) : Observable<any>{
+  newSkill(feedback: SkillRecords) : Observable<any>{
     return this.http.post(this.ALL_SKILLS_URL,feedback);
   }
   postSkills(id:String,records: SkillRecords): Observable<SkillRecords>{

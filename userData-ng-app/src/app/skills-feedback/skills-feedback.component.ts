@@ -11,7 +11,8 @@ export class SkillsFeedbackComponent implements OnInit {
 
   model:SkillsFeedbackViewModel = {
     
-    skill:''
+    skill:'',
+    number:''
 
   };
   constructor(private apiService:ApiService) { }
@@ -20,7 +21,7 @@ export class SkillsFeedbackComponent implements OnInit {
   }
 
   sendSkills():void{
-    this.apiService.sendSkills(this.model).subscribe(
+    this.apiService.newSkill(this.model).subscribe(
       res => {
         location.reload();
       },
@@ -35,5 +36,6 @@ export class SkillsFeedbackComponent implements OnInit {
 export interface SkillsFeedbackViewModel{
     
     skill:String;
+    number:String;
     
 }

@@ -14,14 +14,21 @@ import javax.persistence.Table;
 public class Skills {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private int skillId;
+	private int number;
 	@Column
 	private String skill;
-	/*@ManyToOne
-    @JoinColumn(name = "user_id")
-	private Skills related;*/
+	@ManyToOne
+	private Topic related;
 	
 	
+	public Topic getRelated() {
+		return related;
+	}
+
+	public void setRelated(Topic related) {
+		this.related = related;
+	}
+
 	public Skills() {
 		
 	}
@@ -39,7 +46,7 @@ public class Skills {
 		this.skill = skill;
 	}
 	public int getNumber() {
-		return skillId;
+		return number;
 	}
 
 
