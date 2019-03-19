@@ -143,6 +143,7 @@ export class NotesComponent implements OnInit {
     console.log(items);
     console.log(this.selectedItems);
     this.model.multipleSkills = this.selectedItems;
+    
   }
   onDeSelectAll(items: any){
     console.log(items);

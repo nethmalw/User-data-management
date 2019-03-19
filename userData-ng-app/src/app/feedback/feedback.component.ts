@@ -58,7 +58,10 @@ export class FeedbackComponent implements OnInit {
   onSelectAll(items: any) {
     console.log(items);
     console.log(this.selectedItems);
-    this.model.multipleSkills = this.selectedItems;
+    for(let i=0;i<items.length;i++){
+     this.model.multipleSkills.push(items[i]);
+    }
+    console.log("Select All: "+this.model.multipleSkills);
   }
   onDeSelectAll(items: any){
     console.log(items);
