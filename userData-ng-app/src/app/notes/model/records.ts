@@ -4,6 +4,6 @@ export interface Records{
     email:String;
     name:String;
     date:String;
-    skills:String;
+    multipleSkills:{number:number,skill:String}[];
     
 }

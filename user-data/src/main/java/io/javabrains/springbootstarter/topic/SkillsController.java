@@ -1,7 +1,9 @@
 package io.javabrains.springbootstarter.topic;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,21 +13,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin
 public class SkillsController {
 	
 	@Autowired
 	private SkillsService skill;
+	ModelMapper modelMapper = new ModelMapper();
 	
+	@RequestMapping("/skills")
+	public List<Skills> getAllSkills() {
+		System.out.println(skill.getAllSkills());
+		return skill.getAllSkills();
+	}
 	@RequestMapping(method = RequestMethod.POST, value="/skills")
 	public void addSkill(@RequestBody Skills skills) {
 		skill.addSkill(skills);
 	}
-	@RequestMapping(method = RequestMethod.GET, value ="/skills")
-	public List<Skills> getAllSkills() {
-		return skill.getAllSkills();
-	}
-	@RequestMapping("/skills/{foo}")
-	public Skills getSkill(@PathVariable("foo") int id) {
+	@RequestMapping("/skills/{id}")
+	public Skills getSkill(@PathVariable int id) {
 		return skill.getSkill(id);
 	}
 	@RequestMapping(method = RequestMethod.PUT, value="/skills/{id}")

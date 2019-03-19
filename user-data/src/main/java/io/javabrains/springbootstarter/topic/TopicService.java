@@ -6,8 +6,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class TopicService {
 	
 		@Autowired
@@ -19,7 +21,7 @@ public class TopicService {
 			return topics;
 		}
 		public Topic getTopic(int id) {
-			return topicRepository.findOne(id);
+			return topicRepository.findById(id).orElse(null);
 		}
 		public void addTopic(Topic topic) {
 			topicRepository.save(topic);
@@ -28,7 +30,7 @@ public class TopicService {
 			topicRepository.save(topic);
 		}
 		public void deleteTopic(int id) {
-			topicRepository.delete(id);
+			topicRepository.deleteById(id);
 		}
 		
 		

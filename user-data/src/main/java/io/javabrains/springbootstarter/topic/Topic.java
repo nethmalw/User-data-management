@@ -1,22 +1,26 @@
 package io.javabrains.springbootstarter.topic;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.JoinColumn;
 
 @Entity
 @Table(name = "userdata") 
 public class Topic {
 	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int userId;
@@ -26,33 +30,34 @@ public class Topic {
 	private String userName;
 	@Column(name = "birthDate")
 	private String birthDate;
-	@Column(name = "skills")
-	private String skills;
 	
+	@ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "employee_skills",
+            joinColumns = {@JoinColumn(name = "employee_id")},
+            inverseJoinColumns = {@JoinColumn(name = "skill_id")})
+	private List<Skills> multipleSkills;
 	
-	@OneToMany
-	private Collection<Skills> multipleSkills = new ArrayList<Skills>();
-	
-	public Collection<Skills> getMultipleSkills() {
-		return multipleSkills;
-	}
-
-	public void setMultipleSkills(Collection<Skills> multipleSkills) {
-		this.multipleSkills = multipleSkills;
-	}
-
 	public Topic() {
 		
 	}
 	
-	public Topic(String email, String name,String date,String skills) {
+	public Topic(String email, String name,String date)  {
 		super();
 		this.email = email;
 		this.userName = name;
 		this.birthDate = date;
-		this.skills = skills;
+
 	}
 	
+	public Topic(String email, String name,String date,ArrayList<Skills> multipleSkills)  {
+		super();
+		this.email = email;
+		this.userName = name;
+		this.birthDate = date;
+		this.multipleSkills = multipleSkills;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -65,12 +70,6 @@ public class Topic {
 	public void setName(String name) {
 		this.userName = name;
 	}
-	public String getSkills() {
-		return skills;
-	}
-	public void setSkills(String skills) {
-		this.skills = skills;
-	}
 	public String getDate() {
 		return birthDate;
 	}
@@ -80,6 +79,13 @@ public class Topic {
 	public int getUserId() {
 		return userId;
 	}
+	public List<Skills> getMultipleSkills() {
+		return multipleSkills;
+	}
+	public void setMultipleSkills(List<Skills> multipleSkills) {
+		this.multipleSkills = multipleSkills;
+	}
+	
 	
 	
 }

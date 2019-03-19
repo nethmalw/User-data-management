@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../shared/api.service';
 import { SkillRecords } from '../skills/model/records';
-import { modelGroupProvider } from '@angular/forms/src/directives/ng_model_group';
 
 @Component({
   selector: 'app-feedback',
@@ -15,14 +14,13 @@ export class FeedbackComponent implements OnInit {
   selectedItems = [];
   dropdownSettings = {};
   
-  temp = new String();
 
   model:FeedbackViewModel = {
-
+    userId:'-1',
     name:'',
     email:'',
     date:'',
-    skills:''
+    multipleSkills:[]
 
   };
   
@@ -32,8 +30,6 @@ export class FeedbackComponent implements OnInit {
 
 
     this.getAllSkills();
-
-    
 
     this.dropdownSettings = {
       singleSelection: false,
@@ -51,30 +47,30 @@ export class FeedbackComponent implements OnInit {
   onItemSelect(item: any) {
     console.log(item);
     console.log(this.selectedItems);
-    //this.model.skills = this.selectedItems.skill;
-    for (let i in this.selectedItems) {
-      var temp = this.selectedItems[i].skill.concat(","+temp);
-      //this.model.skills = this.selectedItems[i].skill;
-      console.log(temp);
-    }
-
-    this.model.skills = temp;
-   
+    this.model.multipleSkills = this.selectedItems;
+  }
+  OnItemDeSelect(item:any){
+    console.log(item);
+    console.log(this.selectedItems);
+    this.selectedItems.splice(item);
+    this.model.multipleSkills = this.selectedItems;
   }
   onSelectAll(items: any) {
     console.log(items);
     console.log(this.selectedItems);
-    for (let i in this.selectedItems) {
-      this.model.skills = this.selectedItems[i].skill;
-      console.log(this.model.skills);
-    }
+    this.model.multipleSkills = this.selectedItems;
+  }
+  onDeSelectAll(items: any){
+    console.log(items);
+    this.selectedItems = [];
+    this.model.multipleSkills = this.selectedItems;
   }
 
   sendFeedback():void{
-    alert(this.model.skills);
+    
     this.apiService.sendFeedback(this.model).subscribe(
       res => {
-        //location.reload();
+        location.reload();
       },
       err=>{
         
@@ -97,9 +93,12 @@ export class FeedbackComponent implements OnInit {
 
 
 
-export interface FeedbackViewModel{
+export class FeedbackViewModel{
+    userId:String;
     name:String;
     email:String;
     date:String;
-    skills:String;
+    multipleSkills:{number:number,skill:String}[];
 }
+
+  

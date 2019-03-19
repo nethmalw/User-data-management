@@ -5,8 +5,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class SkillsService {
 	
 	@Autowired
@@ -24,9 +26,9 @@ public class SkillsService {
 		skill.save(skills);
 	}
 	public void deleteSkill(int id) {
-		skill.delete(id);
+		skill.deleteById(id);
 	}
 	public Skills getSkill(int id) {
-		return skill.findOne(id);
+		return skill.findById(id).orElse(null);
 	}
 }

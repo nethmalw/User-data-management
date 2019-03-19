@@ -1,8 +1,11 @@
 package io.javabrains.springbootstarter.topic;
 
-import org.springframework.data.repository.CrudRepository;
 
-public interface TopicRepository extends CrudRepository<Topic,Integer>{
+import org.springframework.data.jpa.repository.JpaRepository;
+
+
+public interface TopicRepository extends JpaRepository<Topic,Integer>{
+	
 	
 	
 }

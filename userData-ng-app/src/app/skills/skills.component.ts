@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { SkillRecords } from './model/records';
 import { ApiService } from '../shared/api.service';
+import { Records } from '../notes/model/records';
+import { EmployeeRecords } from './model/data';
 
 @Component({
   selector: 'app-skills',
@@ -12,25 +13,30 @@ export class SkillsComponent implements OnInit {
   records: SkillRecords[] = [];
   info:SkillRecords[] = [];
   selectedRecord:SkillRecords[] = [];
-
+  employeeRecords: Records[] = [];
+  mapping:EmployeeRecords[] = [];
+  
   constructor(private apiService: ApiService) { }
 
   model:SkillsViewModel = {
     
     skill:'',
     number:''
-
   };
   
 
   ngOnInit() {
     this.getAllSkills();
+    this.getAllRecords();
+
   }
 
   public getAllSkills(){
     this.apiService.getAllSkills().subscribe(
       res => {
         this.records = res;
+        for(let i=0; i<this.records.length; i++){
+        }
       },
       err => {
         
@@ -41,7 +47,8 @@ export class SkillsComponent implements OnInit {
   addSkill(){
     let newSkillRecord:SkillRecords = {
       skill:"Default",
-      number:"0"
+      number:"0",
+      employees:""
     };
     
     this.updateSkill(newSkillRecord);
@@ -77,8 +84,19 @@ export class SkillsComponent implements OnInit {
     );
   }
 
+  public getAllRecords(){
+    this.apiService.getAllRecords().subscribe(
+      res => {
+        this.employeeRecords = res;
+      },
+      err => {
+        
+      }
+    );
+  }
 
 }
+
 
 export interface SkillsViewModel{
   

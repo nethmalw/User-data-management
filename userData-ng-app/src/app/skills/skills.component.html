@@ -1,7 +1,7 @@
 <div class="container">
     <!-- Note menu -->
     <div class="row" style="margin-top:12px;">
-      
+      <div><h3>Manage Skills</h3></div>
       <div class="col-md-4">
       
         <button type="button"
@@ -67,6 +67,17 @@
                         class="input-label-lg"
                         maxlength = "18" style="width:80%"
                 />
+                </div>
+                
+                <div>
+                    <label for="name">Employees:</label>
+                <div *ngFor = "let emp of employeeRecords">
+                  <div *ngFor = "let skill of emp.multipleSkills">
+                    <div *ngIf = "skill.number == record.number">
+                      <p style="font-weight:bold">{{emp.name}}</p>
+                    </div>
+                  </div>
+                </div>
                 </div>
                 
                 
