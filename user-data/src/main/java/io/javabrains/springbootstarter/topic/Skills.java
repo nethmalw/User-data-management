@@ -23,7 +23,7 @@ public class Skills {
 	private String skill;
 	
 	@JsonIgnore
-	@ManyToMany(mappedBy="multipleSkills",cascade= {CascadeType.PERSIST,CascadeType.MERGE})
+	@ManyToMany(mappedBy="multipleSkills")
 	private List<Topic> topicList;
 	
 	public Skills() {

@@ -1,9 +1,7 @@
 package io.javabrains.springbootstarter.topic;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,7 +29,7 @@ public class Topic {
 	@Column(name = "birthDate")
 	private String birthDate;
 	
-	@ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
     @JoinTable(
             name = "employee_skills",
             joinColumns = {@JoinColumn(name = "employee_id")},

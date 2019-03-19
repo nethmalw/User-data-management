@@ -26,7 +26,15 @@ public class SkillsService {
 		skill.save(skills);
 	}
 	public void deleteSkill(int id) {
-		skill.deleteById(id);
+		Skills a = skill.findById(id).orElse(null);
+		for (Topic b : a.getTopicList()) {
+		    if (b.getMultipleSkills().size() == 1) {
+		        skill.deleteById(b.getUserId());
+		    } else {
+		        b.getMultipleSkills().remove(a);
+		    }
+		}
+		skill.deleteById(a.getNumber());
 	}
 	public Skills getSkill(int id) {
 		return skill.findById(id).orElse(null);
